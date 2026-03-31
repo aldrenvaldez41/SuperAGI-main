@@ -5,6 +5,13 @@ import requests
 import zipfile
 import json
 
+# Import new toolkits for registration
+from superagi.tools.lightrag.lightrag_toolkit import LightRagToolkit
+from superagi.tools.browserless.browserless_toolkit import BrowserlessToolkit
+from superagi.tools.n8n.n8n_toolkit import N8nToolkit
+from superagi.tools.trilium.trilium_toolkit import TriliumToolkit
+from superagi.tools.postiz.postiz_toolkit import PostizToolkit
+
 
 def parse_github_url(github_url):
     parts = github_url.split('/')
@@ -96,6 +103,20 @@ def update_tools_json(existing_tools_json_path, folder_links):
     tools_data["tools"].update(folder_links)
     with open(existing_tools_json_path, "w") as file:
         json.dump(tools_data, file, indent=4)
+
+
+def get_registered_toolkits():
+    """
+    Returns a list of all registered toolkit classes.
+    This enables explicit registration and discovery of available toolkits.
+    """
+    return [
+        LightRagToolkit,
+        BrowserlessToolkit,
+        N8nToolkit,
+        TriliumToolkit,
+        PostizToolkit,
+    ]
 
 
 def load_tools_config():
