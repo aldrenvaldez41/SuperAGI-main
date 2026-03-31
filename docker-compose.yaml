@@ -4,6 +4,8 @@ services:
     volumes:
       - "./:/app"
     build: .
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - super__redis
       - super__postgres
@@ -15,6 +17,8 @@ services:
       - "./:/app"
       - "${EXTERNAL_RESOURCE_DIR:-./workspace}:/app/ext"
     build: .
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - super__redis
       - super__postgres
@@ -59,7 +63,7 @@ services:
   proxy:
     image: nginx:stable-alpine
     ports:
-      - "3000:80"
+      - "32800:80"
     networks:
       - super_network
     depends_on:

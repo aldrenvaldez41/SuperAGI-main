@@ -2,20 +2,22 @@
 PINECONE_API_KEY: YOUR_PINECONE_API_KEY
 PINECONE_ENVIRONMENT: YOUR_PINECONE_ENVIRONMENT
 
-OPENAI_API_KEY: YOUR_OPEN_API_KEY
+# PRIMARY LLM — Ollama local (no cost). Model must be pulled: ollama pull llama3.1:8b
+# VPS: KVM2 8GB RAM. Monitor memory; if OOM, switch MODEL_NAME to mistral:7b
+OPENAI_API_BASE: "http://host.docker.internal:32768/v1"
+OPENAI_API_KEY: "ollama"
+MODEL_NAME: "llama3.1:8b"
+RESOURCES_SUMMARY_MODEL_NAME: "llama3.1:8b"
+
+# FALLBACK LLM — OpenRouter. Generate key at openrouter.ai
+# To activate: comment the Ollama lines above and uncomment these:
+# OPENAI_API_BASE: "https://openrouter.ai/api/v1"
+# OPENAI_API_KEY: YOUR_OPENROUTER_API_KEY
+# MODEL_NAME: "anthropic/claude-3-haiku"
+
 PALM_API_KEY: YOUR_PALM_API_KEY
 REPLICATE_API_TOKEN: YOUR_REPLICATE_API_TOKEN
 HUGGING_API_TOKEN: YOUR_HUGGING_FACE_API_TOKEN
-
-# For locally hosted LLMs comment out the next line and uncomment the one after
-# to configure a local llm point your browser to 127.0.0.1:7860 and click on the model tab in text generation web ui.
-OPENAI_API_BASE: https://api.openai.com/v1
-#OPENAI_API_BASE: "http://super__tgwui:5001/v1"
-
-# "gpt-3.5-turbo-0301": 4032, "gpt-4-0314": 8092, "gpt-3.5-turbo": 4032, "gpt-4": 8092, "gpt-4-32k": 32768, "gpt-4-32k-0314": 32768, "llama":2048, "mpt-7b-storywriter":45000
-MODEL_NAME: "gpt-3.5-turbo-0301"
-# "gpt-3.5-turbo", , "gpt-4", "models/chat-bison-001"
-RESOURCES_SUMMARY_MODEL_NAME: "gpt-3.5-turbo"
 MAX_TOOL_TOKEN_LIMIT: 800
 MAX_MODEL_TOKEN_LIMIT: 4032 # set to 2048 for llama
 
@@ -119,7 +121,35 @@ ENGINE_ID: "stable-diffusion-xl-beta-v2-2-2"
 #CHROMA_HOST_NAME: YOUR_CHROMA_HOST_NAME
 #CHROMA_PORT: YOUR_CHROMA_PORT
 
-## To use Qdrant for vector store
-#QDRANT_HOST_NAME: YOUR_QDRANT_HOST_NAME
-#QDRANT_PORT: YOUR_QDRANT_PORT
+## Qdrant vector store — existing VPS instance
+RESOURCE_VECTOR_STORE: QDRANT
+RESOURCE_VECTOR_STORE_INDEX_NAME: superagi_resources
+QDRANT_HOST_NAME: host.docker.internal
+QDRANT_PORT: 32782
 #GPU_LAYERS: GPU LAYERS THAT YOU WANT TO OFFLOAD TO THE GPU WHILE USING LOCAL LLMS
+
+#####################------------------CUSTOM TOOL ENDPOINTS-------------------------########################
+# LIGHTRAG — Graph RAG knowledge base
+LIGHTRAG_URL: "http://rag.buildwithaldren.com"
+
+# BROWSERLESS — Headless browser scraping
+BROWSERLESS_URL: "http://browsr.buildwithaldren.com"
+BROWSERLESS_TOKEN: YOUR_BROWSERLESS_TOKEN
+
+# N8N — Workflow automation webhooks
+N8N_BASE_URL: "http://n8n.buildwithaldren.com"
+
+# TRILIUM NEXT — Note storage
+TRILIUM_URL: "http://notes.buildwithaldren.com"
+TRILIUM_TOKEN: YOUR_TRILIUM_API_TOKEN
+
+# POSTIZ — Social media scheduling
+POSTIZ_URL: "http://social.buildwithaldren.com"
+POSTIZ_API_KEY: YOUR_POSTIZ_API_KEY
+
+# SERPER.DEV — Web search (free tier: 2500/month)
+SERP_API_KEY: YOUR_SERPER_DEV_API_KEY
+
+# KNOWLEDGE BASE COLLECTIONS
+LIGHTRAG_COLLECTION_REAL_ESTATE: "real_estate"
+LIGHTRAG_COLLECTION_GENERAL: "general"
