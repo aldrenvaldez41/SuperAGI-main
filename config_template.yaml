@@ -55,7 +55,7 @@ expiry_time_hours: 1
 #GITHUB OAUTH:
 GITHUB_CLIENT_ID:
 GITHUB_CLIENT_SECRET:
-FRONTEND_URL: "http://localhost:3000"
+FRONTEND_URL: "http://localhost:32800"  # Must match proxy port in docker-compose.yaml
 
 #ENCRYPTION KEY, Replace this with your own key for production
 ENCRYPTION_KEY: abcdefghijklmnopqrstuvwxyz123456
@@ -146,9 +146,6 @@ TRILIUM_TOKEN: YOUR_TRILIUM_API_TOKEN
 # POSTIZ — Social media scheduling
 POSTIZ_URL: "http://social.buildwithaldren.com"
 POSTIZ_API_KEY: YOUR_POSTIZ_API_KEY
-
-# SERPER.DEV — Web search (free tier: 2500/month)
-SERP_API_KEY: YOUR_SERPER_DEV_API_KEY
 
 # KNOWLEDGE BASE COLLECTIONS
 LIGHTRAG_COLLECTION_REAL_ESTATE: "real_estate"
