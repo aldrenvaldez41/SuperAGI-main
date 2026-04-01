@@ -45,6 +45,7 @@ RESOURCE_VECTOR_STORE: QDRANT
 RESOURCE_VECTOR_STORE_INDEX_NAME: superagi_resources
 QDRANT_HOST_NAME: host.docker.internal
 QDRANT_PORT: 32782
+QDRANT_API_KEY: YOUR_QDRANT_API_KEY
 
 #####################------------------TOOLS KEYS-------------------------########################
 
@@ -72,5 +73,7 @@ POSTIZ_URL: "http://social.buildwithaldren.com"
 POSTIZ_API_KEY: YOUR_POSTIZ_API_KEY
 
 # KNOWLEDGE BASE COLLECTIONS
-LIGHTRAG_COLLECTION_REAL_ESTATE: "real_estate"
+# One collection per developer; use source tags for individual projects (e.g. udho, udtc)
+LIGHTRAG_COLLECTION_8990: "8990_holdings"
+LIGHTRAG_COLLECTION_COMPETITOR: "competitor_research"
 LIGHTRAG_COLLECTION_GENERAL: "general"
