@@ -3,7 +3,7 @@
 # PRIMARY LLM — Ollama local (no cost)
 # Run on VPS: docker exec -it <ollama_container> ollama pull llama3.1:8b
 # If OOM on KVM2 (8GB RAM), switch to: mistral:7b
-OPENAI_API_BASE: "http://host.docker.internal:32768/v1"
+OPENAI_API_BASE: "http://host.docker.internal:32771/v1"
 OPENAI_API_KEY: "ollama"
 MODEL_NAME: "llama3.1:8b"
 RESOURCES_SUMMARY_MODEL_NAME: "llama3.1:8b"
