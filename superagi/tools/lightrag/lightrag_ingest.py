@@ -31,8 +31,8 @@ class LightRagIngestTool(BaseTool):
         base_url = get_config("LIGHTRAG_URL", "http://rag.buildwithaldren.com")
         try:
             response = requests.post(
-                f"{base_url}/insert",
-                json={"string": text, "collection": collection, "source": source},
+                f"{base_url}/documents/text",
+                json={"text": text, "collection": collection, "source": source},
                 timeout=30
             )
             if response.status_code == 200:
