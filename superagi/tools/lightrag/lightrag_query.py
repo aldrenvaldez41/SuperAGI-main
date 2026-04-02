@@ -27,16 +27,25 @@ class LightRagQueryTool(BaseTool):
     )
     args_schema: Type[LightRagQuerySchema] = LightRagQuerySchema
 
-    def _execute(self, query: str, collection: str = "real_estate", mode: str = "hybrid") -> str:
-        base_url = get_config("LIGHTRAG_URL", "http://rag.buildwithaldren.com")
+    def _get_token(self, base_url: str) -> str:
         username = get_config("LIGHTRAG_USERNAME", "")
         password = get_config("LIGHTRAG_PASSWORD", "")
-        auth = (username, password) if username else None
+        response = requests.post(
+            f"{base_url}/login",
+            data={"username": username, "password": password},
+            timeout=10
+        )
+        return response.json().get("access_token", "")
+
+    def _execute(self, query: str, collection: str = "real_estate", mode: str = "hybrid") -> str:
+        base_url = get_config("LIGHTRAG_URL", "http://rag.buildwithaldren.com")
         try:
+            token = self._get_token(base_url)
+            headers = {"Authorization": f"Bearer {token}"}
             response = requests.post(
                 f"{base_url}/query",
                 json={"query": query, "mode": mode, "collection": collection},
-                auth=auth,
+                headers=headers,
                 timeout=60
             )
             if response.status_code == 200:

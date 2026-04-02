@@ -27,16 +27,25 @@ class LightRagIngestTool(BaseTool):
     )
     args_schema: Type[LightRagIngestSchema] = LightRagIngestSchema
 
-    def _execute(self, text: str, collection: str = "real_estate", source: str = "manual") -> str:
-        base_url = get_config("LIGHTRAG_URL", "http://rag.buildwithaldren.com")
+    def _get_token(self, base_url: str) -> str:
         username = get_config("LIGHTRAG_USERNAME", "")
         password = get_config("LIGHTRAG_PASSWORD", "")
-        auth = (username, password) if username else None
+        response = requests.post(
+            f"{base_url}/login",
+            data={"username": username, "password": password},
+            timeout=10
+        )
+        return response.json().get("access_token", "")
+
+    def _execute(self, text: str, collection: str = "real_estate", source: str = "manual") -> str:
+        base_url = get_config("LIGHTRAG_URL", "http://rag.buildwithaldren.com")
         try:
+            token = self._get_token(base_url)
+            headers = {"Authorization": f"Bearer {token}"}
             response = requests.post(
                 f"{base_url}/documents/text",
                 json={"text": text, "collection": collection, "source": source},
-                auth=auth,
+                headers=headers,
                 timeout=30
             )
             if response.status_code == 200:
