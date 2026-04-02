@@ -56,6 +56,8 @@ SERP_API_KEY: YOUR_SERPER_DEV_API_KEY
 
 # LIGHTRAG — Graph RAG knowledge base
 LIGHTRAG_URL: "http://rag.buildwithaldren.com"
+LIGHTRAG_USERNAME: YOUR_LIGHTRAG_USERNAME
+LIGHTRAG_PASSWORD: YOUR_LIGHTRAG_PASSWORD
 
 # BROWSERLESS — Headless browser scraping (developer sites only)
 BROWSERLESS_URL: "http://browsr.buildwithaldren.com"

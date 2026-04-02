@@ -29,10 +29,14 @@ class LightRagQueryTool(BaseTool):
 
     def _execute(self, query: str, collection: str = "real_estate", mode: str = "hybrid") -> str:
         base_url = get_config("LIGHTRAG_URL", "http://rag.buildwithaldren.com")
+        username = get_config("LIGHTRAG_USERNAME", "")
+        password = get_config("LIGHTRAG_PASSWORD", "")
+        auth = (username, password) if username else None
         try:
             response = requests.post(
                 f"{base_url}/query",
                 json={"query": query, "mode": mode, "collection": collection},
+                auth=auth,
                 timeout=60
             )
             if response.status_code == 200:
